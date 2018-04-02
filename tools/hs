@@ -1,0 +1,24 @@
+#!/bin/env bash
+
+hash()
+{
+    while [ $# -ne 0 ]
+    do
+    if [ -f $1 ]
+    then
+        res=`md5sum $1`
+        md5=${res%%' '*}
+        extension=${1##*.}
+        if [ $extension != $1 ]
+        then
+            if [ $1 != "$md5.$extension" ]
+            then
+                mv $1 "$md5.$extension"
+            fi
+        fi
+    fi
+    shift
+    done
+}
+
+hash $@

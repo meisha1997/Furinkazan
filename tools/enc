@@ -1,0 +1,21 @@
+#/usr/bin/env bash
+
+encrpyt()
+{
+    if [ '-d' != $1 ]
+    then
+        openssl aes-256-ecb -e -pass stdin -in $1 -out $1.en
+        if [ $? -eq 0 ]
+        then 
+            rm $1
+        fi
+    else
+        openssl aes-256-ecb -d -pass stdin -in $2 -out ${2//.en/}
+        if [ $? -eq 0 ]
+        then 
+            rm $2
+        fi
+    fi
+}
+
+encrpyt $@

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 create_branch()
 {
     cmd=`git config -l |grep fetch`
